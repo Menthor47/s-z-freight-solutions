@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageBreadcrumbs } from "@/components/PageBreadcrumbs";
 
 interface Shipment {
   id: string;
@@ -171,6 +172,9 @@ const TrackShipment = () => {
       
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">
         <div className="container mx-auto px-4">
+          <div className="mb-4 text-left">
+            <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "Track Shipment" }]} />
+          </div>
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Track Your Shipment</h1>
             <p className="text-xl text-muted-foreground mb-8">

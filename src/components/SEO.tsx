@@ -9,13 +9,13 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = "S&Z Trading - Professional Freight & Logistics Solutions",
-  description = "Reliable freight transport across Spain and Europe. Road freight, warehousing, global logistics, and supply chain consultancy. Get instant quotes 24/7.",
-  keywords = "freight transport, logistics Spain, European road freight, warehousing, supply chain, cargo transport, business relocation",
+  title = "S&Z TRADING INTERNATIONAL S.C.A. - Professional Freight & Logistics Solutions",
+  description = "Reliable freight transport across Spain and Europe. Road freight, warehousing, relocation services, global logistics, and supply chain consultancy. Get instant quotes 24/7.",
+  keywords = "freight transport, logistics Spain, European road freight, warehousing, supply chain, cargo transport, business relocation, S&Z Trading International",
   ogImage = "/hero-truck.jpg",
   ogType = "website",
 }: SEOProps) => {
-  const fullTitle = title.includes("S&Z Trading") ? title : `${title} | S&Z Trading`;
+  const fullTitle = title.includes("S&Z") ? title : `${title} | S&Z TRADING INTERNATIONAL S.C.A.`;
   
   return (
     <Helmet>

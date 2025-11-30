@@ -6,6 +6,8 @@ import { Truck, Globe, Warehouse, Ship, TrendingUp, Package } from "lucide-react
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { PageBreadcrumbs } from "@/components/PageBreadcrumbs";
+import { ServicesFaqSchema } from "@/components/StructuredData";
 
 const Services = () => {
   const services = [
@@ -114,6 +116,9 @@ const Services = () => {
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">
         <div className="container mx-auto px-4">
+          <div className="mb-4 text-left">
+            <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "Services" }]} />
+          </div>
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
             <p className="text-xl text-muted-foreground">
@@ -186,6 +191,8 @@ const Services = () => {
           </Accordion>
         </div>
       </section>
+
+      <ServicesFaqSchema />
 
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 max-w-5xl">

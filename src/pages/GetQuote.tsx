@@ -15,6 +15,8 @@ import { useLocation } from "react-router-dom";
 import { quoteFormSchema } from "@/lib/validations";
 import { SEO } from "@/components/SEO";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { PageBreadcrumbs } from "@/components/PageBreadcrumbs";
+import { BUSINESS_INFO, SERVICE_RATES, QUOTE_CALCULATION, SPECIAL_REQUIREMENTS } from "@/lib/constants";
 
 const GetQuote = () => {
   const { toast } = useToast();
@@ -53,18 +55,9 @@ const GetQuote = () => {
   ];
 
   const calculateEstimate = () => {
-    const baseRates: Record<string, number> = {
-      "spanish-road": 150,
-      "european-road": 450,
-      relocation: 800,
-      global: 1200,
-      warehousing: 200,
-      consultancy: 500,
-    };
-
-    const weightFactor = parseFloat(formData.weight) * 0.5;
-    const baseRate = baseRates[formData.serviceType] || 300;
-    const specialReqCost = formData.specialRequirements.length * 50;
+    const weightFactor = parseFloat(formData.weight) * QUOTE_CALCULATION.weightFactor;
+    const baseRate = SERVICE_RATES[formData.serviceType as keyof typeof SERVICE_RATES] || 300;
+    const specialReqCost = formData.specialRequirements.length * QUOTE_CALCULATION.specialRequirementCost;
     
     const total = baseRate + weightFactor + specialReqCost;
     setEstimatedCost(Math.round(total));
@@ -428,7 +421,7 @@ const GetQuote = () => {
                 <li>✓ Email confirmation sent to {formData.email}</li>
                 <li>✓ Our team reviews your requirements</li>
                 <li>✓ You'll receive a formal quote within 2 hours</li>
-                <li>✓ Questions? Call us at +34 900 123 456</li>
+                <li>✓ Questions? Call us at {BUSINESS_INFO.phone}</li>
               </ul>
             </div>
           </div>
@@ -466,6 +459,9 @@ const GetQuote = () => {
       
       <section className="py-16 flex-1">
         <div className="container mx-auto px-4 max-w-4xl">
+          <div className="mb-4 text-left">
+            <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "Get Quote" }]} />
+          </div>
           {step < 6 && (
             <div className="mb-8">
               <div className="flex justify-between items-center mb-4">

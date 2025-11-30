@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, Phone } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { BUSINESS_INFO } from "@/lib/constants";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,7 @@ export const Navigation = () => {
 
   const navLinks = [
     { label: "Services", path: "/services" },
-    { label: "Relocation", path: "/#relocation" },
+    { label: "Relocation", path: "/relocation" },
     { label: "Get Quote", path: "/get-quote" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
@@ -52,9 +53,9 @@ export const Navigation = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center space-x-4">
-          <a href="tel:+34900123456" className="flex items-center space-x-2 text-sm font-medium">
+          <a href={`tel:${BUSINESS_INFO.phoneRaw}`} className="flex items-center space-x-2 text-sm font-medium">
             <Phone className="h-4 w-4" />
-            <span>+34 900 123 456</span>
+            <span>{BUSINESS_INFO.phone}</span>
           </a>
           <Button asChild>
             <Link to="/get-quote">Get Quote</Link>
@@ -82,9 +83,9 @@ export const Navigation = () => {
                   {link.label}
                 </Link>
               ))}
-              <a href="tel:+34900123456" className="flex items-center space-x-2 text-lg font-medium pt-4 border-t">
+              <a href={`tel:${BUSINESS_INFO.phoneRaw}`} className="flex items-center space-x-2 text-lg font-medium pt-4 border-t">
                 <Phone className="h-5 w-5" />
-                <span>+34 900 123 456</span>
+                <span>{BUSINESS_INFO.phone}</span>
               </a>
             </div>
           </SheetContent>
