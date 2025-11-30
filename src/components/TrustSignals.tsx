@@ -4,7 +4,7 @@ export const TrustSignals = () => {
   const signals = [
     {
       icon: Shield,
-      value: "€5M",
+      value: "€250K",
       label: "Insurance Coverage",
     },
     {
@@ -14,12 +14,12 @@ export const TrustSignals = () => {
     },
     {
       icon: Users,
-      value: "500+",
+      value: "250+",
       label: "Business Clients",
     },
     {
       icon: Clock,
-      value: "14 Years",
+      value: "3+ Years",
       label: "In Operation",
     },
   ];
