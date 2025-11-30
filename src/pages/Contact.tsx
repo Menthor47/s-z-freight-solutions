@@ -74,9 +74,9 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO 
-        title="Contact Us - S&Z Trading"
-        description="Get in touch with S&Z Trading for all your freight and logistics needs. Available 24/7 for emergency support."
-        keywords="contact logistics, freight support, S&Z Trading contact"
+        title="Contact Us - S&Z Trading International"
+        description="Get in touch with S&Z Trading International for all your freight and logistics needs. Available 24/7 for emergency support."
+        keywords="contact logistics, freight support, S&Z Trading International contact"
       />
       <Navigation />
       <WhatsAppButton />
@@ -169,8 +169,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold mb-2">Head Office</h3>
                       <p className="text-muted-foreground">
-                        Calle Principal 123<br />
-                        28001 Madrid<br />
+                        Málaga<br />
                         Spain
                       </p>
                     </div>
@@ -185,8 +184,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold mb-2">Phone</h3>
                       <p className="text-muted-foreground">
-                        Main: <a href="tel:+34900123456" className="text-primary hover:underline">+34 900 123 456</a><br />
-                        Toll-free: <a href="tel:+34800123456" className="text-primary hover:underline">+34 800 123 456</a>
+                        <a href="tel:+34684482440" className="text-primary hover:underline">+34 684 48 24 40</a>
                       </p>
                     </div>
                   </div>
@@ -200,9 +198,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold mb-2">Email</h3>
                       <p className="text-muted-foreground">
-                        General: <a href="mailto:info@sztrading.com" className="text-primary hover:underline">info@sztrading.com</a><br />
-                        Quotes: <a href="mailto:quotes@sztrading.com" className="text-primary hover:underline">quotes@sztrading.com</a><br />
-                        Support: <a href="mailto:support@sztrading.com" className="text-primary hover:underline">support@sztrading.com</a>
+                        <a href="mailto:esoffice@szitrans.com" className="text-primary hover:underline">esoffice@szitrans.com</a>
                       </p>
                     </div>
                   </div>

@@ -187,6 +187,73 @@ const Services = () => {
         </div>
       </section>
 
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Find quick answers about our freight, logistics, and relocation services. If you don’t see your question here, our team is happy to help.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold">General Logistics</h3>
+              <div>
+                <h4 className="font-semibold mb-1">What regions do you cover?</h4>
+                <p className="text-sm text-muted-foreground">
+                  We are based in Spain and operate across major European corridors. Our core network covers Spain, Portugal, France, Germany, the Benelux countries, Italy, and the UK, with partners providing onward connections to the rest of Europe.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-1">What types of goods do you transport?</h4>
+                <p className="text-sm text-muted-foreground">
+                  We handle palletised goods, full and part truck loads, machinery, retail stock, e-commerce shipments, and general industrial cargo. For hazardous, temperature-controlled, or unusual loads, we confirm the safest solution for your case.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-1">Are my shipments insured?</h4>
+                <p className="text-sm text-muted-foreground">
+                  Yes. All shipments are covered by standard carrier liability, and we can arrange extended insurance for high-value or sensitive cargo on request. Share the approximate value when requesting a quote so we can propose the right cover.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-1">How do I request a quote?</h4>
+                <p className="text-sm text-muted-foreground">
+                  You can request a quote via our online Get Quote form, by emailing us your shipment details, or by calling our team. Provide origin, destination, dates, approximate weight or volume, and any special requirements.
+                </p>
+              </div>
+            </div>
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold">Moving &amp; Relocation</h3>
+              <div>
+                <h4 className="font-semibold mb-1">What kind of relocations do you handle?</h4>
+                <p className="text-sm text-muted-foreground">
+                  We manage business relocations of all sizes, from small offices to warehouses and light industrial sites. Depending on your needs, we can also support selected residential moves linked to corporate relocations.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-1">Can you move us outside normal business hours?</h4>
+                <p className="text-sm text-muted-foreground">
+                  Yes. Many clients prefer evening or weekend moves to avoid disruption. We can plan relocations outside standard office hours, including phased moves over several days.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-1">Do you provide packing materials and packing services?</h4>
+                <p className="text-sm text-muted-foreground">
+                  We can supply boxes, crates, wrapping materials, labels, and provide full packing and unpacking services. You decide what your team will handle and what you would like us to manage.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-1">What information do you need for a relocation quote?</h4>
+                <p className="text-sm text-muted-foreground">
+                  For an accurate relocation quote, we usually ask for current and new addresses, preferred move dates, approximate size of the premises, any heavy or specialist equipment, access details, and whether you need packing or unpacking services.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 text-center">

@@ -10,13 +10,16 @@ export const Navigation = () => {
 
   const navLinks = [
     { label: "Services", path: "/services" },
+    { label: "Relocation", path: "/#relocation" },
     { label: "Get Quote", path: "/get-quote" },
-    { label: "Track Shipment", path: "/track" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    const basePath = path.split("#")[0];
+    return location.pathname === basePath;
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

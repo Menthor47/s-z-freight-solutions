@@ -13,12 +13,12 @@ export const Footer = () => {
                 <span className="text-xl font-bold text-white">S&Z</span>
               </div>
               <div>
-                <div className="font-bold text-trust-navy">S&Z Trading</div>
-                <div className="text-xs text-muted-foreground">International</div>
+                <div className="font-bold text-trust-navy">S&Z TRADING</div>
+                <div className="text-xs text-muted-foreground uppercase">International S.C.A.</div>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Professional freight and logistics services across Spain and Europe since 2010.
+              Professional freight and logistics services across Spain and Europe since 2022.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -39,7 +39,7 @@ export const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">Our Services</Link></li>
               <li><Link to="/get-quote" className="text-sm text-muted-foreground hover:text-primary transition-colors">Get Quote</Link></li>
-              <li><Link to="/track" className="text-sm text-muted-foreground hover:text-primary transition-colors">Track Shipment</Link></li>
+              <li><Link to="/#relocation" className="text-sm text-muted-foreground hover:text-primary transition-colors">Relocation</Link></li>
               <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
               <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
             </ul>
@@ -63,22 +63,22 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>Calle Principal 123, 28001 Madrid, Spain</span>
+                <span>Málaga, Spain</span>
               </li>
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <a href="tel:+34900123456" className="hover:text-primary transition-colors">+34 900 123 456</a>
+                <a href="tel:+34684482440" className="hover:text-primary transition-colors">+34 684 48 24 40</a>
               </li>
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                <a href="mailto:info@sztrading.com" className="hover:text-primary transition-colors">info@sztrading.com</a>
+                <a href="mailto:esoffice@szitrans.com" className="hover:text-primary transition-colors">esoffice@szitrans.com</a>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} S&Z Trading International. All rights reserved. | Company Reg: B-12345678 | VAT: ES12345678A</p>
+          <p>&copy; {new Date().getFullYear()} S&Z TRADING INTERNATIONAL S.C.A. All rights reserved.</p>
         </div>
       </div>
     </footer>

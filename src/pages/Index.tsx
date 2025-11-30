@@ -78,14 +78,16 @@ const Index = () => {
                 <span className="text-primary block">Transport Solutions</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-xl">
-                Reliable, cost-effective logistics for your business. From Madrid to Munich, we deliver on time, every time.
+                Reliable, cost-effective logistics and relocation services for your business. From Madrid to Munich, we deliver on time, every time.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="text-lg">
                   <Link to="/get-quote">Get Free Quote</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="text-lg">
-                  <Link to="/services">View Services</Link>
+                  <Link to="/get-quote" state={{ serviceType: "relocation" }}>
+                    Plan Your Move
+                  </Link>
                 </Button>
               </div>
               <div className="flex items-center space-x-8 pt-4 text-sm text-muted-foreground">
@@ -95,7 +97,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="h-2 w-2 rounded-full bg-accent" />
-                  <span>Real-time Tracking</span>
+                  <span>Relocation Experts</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="h-2 w-2 rounded-full bg-accent" />
@@ -113,6 +115,66 @@ const Index = () => {
 
       {/* Trust Signals */}
       <TrustSignals />
+
+      <section id="relocation" className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Moving &amp; Relocation Services</h2>
+            <p className="text-lg text-muted-foreground">
+              Move your business or inventory across Spain and Europe with a partner that treats your cargo like its own. From office moves to warehouse relocations, we plan every step so your operations keep running with minimal downtime.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+            <div className="space-y-2">
+              <h3 className="font-semibold text-lg">End-to-end planning</h3>
+              <p className="text-sm text-muted-foreground">
+                Dedicated coordinators who plan your move from first survey to final delivery.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-semibold text-lg">Professional packing &amp; handling</h3>
+              <p className="text-sm text-muted-foreground">
+                Trained crews, quality packing materials, and the right equipment for heavy, fragile, or high-value items.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-semibold text-lg">Out-of-hours moves</h3>
+              <p className="text-sm text-muted-foreground">
+                Evening and weekend relocations to avoid disruption to your teams and customers.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-semibold text-lg">Safe and compliant transport</h3>
+              <p className="text-sm text-muted-foreground">
+                Vehicles and routes selected for your load type, with insurance options tailored to your risk profile.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-semibold text-lg">Pan-European coverage</h3>
+              <p className="text-sm text-muted-foreground">
+                Reliable road and intermodal connections across Spain and all major European corridors.
+              </p>
+            </div>
+          </div>
+          <div className="text-center">
+            <p className="text-lg text-muted-foreground mb-6">
+              Ready to plan a move? Share your route, dates, and what you need to move, and we’ll prepare a tailored relocation plan and quote.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg">
+                <Link to="/get-quote" state={{ serviceType: "relocation" }}>
+                  Plan Your Move
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/contact">
+                  Talk to a Relocation Specialist
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Services Grid */}
       <section className="py-16 bg-background">
