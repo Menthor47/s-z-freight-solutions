@@ -10,8 +10,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Truck, MapPin, Package, User, CheckCircle } from "lucide-react";
+import { Truck, MapPin, Package, User, CheckCircle, Loader2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { quoteFormSchema } from "@/lib/validations";
+import { SEO } from "@/components/SEO";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const GetQuote = () => {
   const { toast } = useToast();
@@ -21,6 +24,7 @@ const GetQuote = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [estimatedCost, setEstimatedCost] = useState<number | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   
   const [formData, setFormData] = useState({
     serviceType: initialData.serviceType || "",
@@ -66,7 +70,44 @@ const GetQuote = () => {
     setEstimatedCost(Math.round(total));
   };
 
+  const validateStep = (currentStep: number): boolean => {
+    setErrors({});
+    const validationData: any = {
+      serviceType: formData.serviceType,
+      origin: formData.origin,
+      destination: formData.destination,
+      weight: formData.weight,
+      contactName: formData.contactName,
+      email: formData.email,
+      phone: formData.phone,
+      specialRequirements: formData.specialRequirements,
+    };
+
+    try {
+      quoteFormSchema.parse(validationData);
+      return true;
+    } catch (error: any) {
+      if (error.errors) {
+        const newErrors: Record<string, string> = {};
+        error.errors.forEach((err: any) => {
+          newErrors[err.path[0]] = err.message;
+        });
+        setErrors(newErrors);
+      }
+      return false;
+    }
+  };
+
   const handleSubmit = async () => {
+    if (!validateStep(4)) {
+      toast({
+        title: "Validation Error",
+        description: "Please check all fields and try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
       const { error } = await supabase.from("quotes").insert([
@@ -98,6 +139,7 @@ const GetQuote = () => {
       
       setStep(6);
     } catch (error) {
+      console.error("Quote submission error:", error);
       toast({
         title: "Error",
         description: "Failed to submit quote. Please try again.",
@@ -162,6 +204,7 @@ const GetQuote = () => {
                   value={formData.origin}
                   onChange={(e) => setFormData({ ...formData, origin: e.target.value })}
                 />
+                {errors.origin && <p className="text-sm text-destructive mt-1">{errors.origin}</p>}
               </div>
               <div>
                 <label className="text-sm font-medium mb-2 block">Destination City/Location</label>
@@ -170,6 +213,7 @@ const GetQuote = () => {
                   value={formData.destination}
                   onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
                 />
+                {errors.destination && <p className="text-sm text-destructive mt-1">{errors.destination}</p>}
               </div>
               <div>
                 <label className="text-sm font-medium mb-2 block">Pickup Date</label>
@@ -207,6 +251,7 @@ const GetQuote = () => {
                   value={formData.weight}
                   onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
                 />
+                {errors.weight && <p className="text-sm text-destructive mt-1">{errors.weight}</p>}
               </div>
               <div>
                 <label className="text-sm font-medium mb-2 block">Length (cm)</label>
@@ -283,6 +328,7 @@ const GetQuote = () => {
                   value={formData.contactName}
                   onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
                 />
+                {errors.contactName && <p className="text-sm text-destructive mt-1">{errors.contactName}</p>}
               </div>
               <div>
                 <label className="text-sm font-medium mb-2 block">Company Name</label>
@@ -300,6 +346,7 @@ const GetQuote = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
+                {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
               </div>
               <div>
                 <label className="text-sm font-medium mb-2 block">Phone Number *</label>
@@ -309,6 +356,7 @@ const GetQuote = () => {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 />
+                {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
               </div>
             </div>
           </div>
@@ -408,7 +456,13 @@ const GetQuote = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Get Quote - Freight Transport Services"
+        description="Get an instant quote for freight transport across Spain and Europe. Fill out our simple form and receive a detailed quote within 2 hours."
+        keywords="freight quote, logistics quote, transport estimate, shipping quote Spain"
+      />
       <Navigation />
+      <WhatsAppButton />
       
       <section className="py-16 flex-1">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -438,9 +492,11 @@ const GetQuote = () => {
                     disabled={!canProceed() || loading}
                     onClick={() => {
                       if (step === 4) {
-                        calculateEstimate();
-                      }
-                      if (step === 5) {
+                        if (validateStep(4)) {
+                          calculateEstimate();
+                          setStep(step + 1);
+                        }
+                      } else if (step === 5) {
                         handleSubmit();
                       } else {
                         setStep(step + 1);

@@ -2,11 +2,19 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Users, Globe, TrendingUp } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const About = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="About Us - European Freight Logistics Since 2010"
+        description="S&Z Trading International - 14 years of reliable freight transport across Spain and Europe. ISO 9001 certified with 98% on-time delivery."
+        keywords="about logistics company, freight company Spain, European logistics, S&Z Trading"
+      />
       <Navigation />
+      <WhatsAppButton />
       
       {/* Hero */}
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">

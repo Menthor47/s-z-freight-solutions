@@ -5,13 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { contactFormSchema } from "@/lib/validations";
+import { SEO } from "@/components/SEO";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const Contact = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,6 +26,26 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
+    
+    try {
+      contactFormSchema.parse(formData);
+    } catch (error: any) {
+      if (error.errors) {
+        const newErrors: Record<string, string> = {};
+        error.errors.forEach((err: any) => {
+          newErrors[err.path[0]] = err.message;
+        });
+        setErrors(newErrors);
+        toast({
+          title: "Validation Error",
+          description: "Please check all fields and try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+
     setLoading(true);
     
     try {
@@ -36,6 +60,7 @@ const Contact = () => {
       
       setFormData({ name: "", email: "", phone: "", company: "", message: "" });
     } catch (error) {
+      console.error("Contact form error:", error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
@@ -48,7 +73,13 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Contact Us - S&Z Trading"
+        description="Get in touch with S&Z Trading for all your freight and logistics needs. Available 24/7 for emergency support."
+        keywords="contact logistics, freight support, S&Z Trading contact"
+      />
       <Navigation />
+      <WhatsAppButton />
       
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">
         <div className="container mx-auto px-4">
@@ -79,6 +110,7 @@ const Contact = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
+                    {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Email *</label>
@@ -89,6 +121,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
+                    {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Phone</label>
@@ -98,6 +131,7 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
+                    {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Company</label>
@@ -116,8 +150,10 @@ const Contact = () => {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     />
+                    {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
                   </div>
                   <Button type="submit" size="lg" className="w-full" disabled={loading}>
+                    {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     {loading ? "Sending..." : "Send Message"}
                   </Button>
                 </form>

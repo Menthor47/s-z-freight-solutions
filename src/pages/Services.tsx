@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Truck, Globe, Warehouse, Ship, TrendingUp, Package } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/SEO";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const Services = () => {
   const services = [
@@ -101,7 +103,13 @@ const Services = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Freight & Logistics Services - Spain & Europe"
+        description="Comprehensive freight solutions: Spanish road transport, European freight, warehousing, global shipping, and supply chain consultancy. Get instant quotes."
+        keywords="freight services, logistics services, road transport, warehousing Spain, global shipping"
+      />
       <Navigation />
+      <WhatsAppButton />
       
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">

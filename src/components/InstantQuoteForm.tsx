@@ -36,11 +36,15 @@ export const InstantQuoteForm = () => {
                   <SelectValue placeholder="Select origin" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="madrid">Madrid</SelectItem>
-                  <SelectItem value="barcelona">Barcelona</SelectItem>
-                  <SelectItem value="valencia">Valencia</SelectItem>
-                  <SelectItem value="seville">Seville</SelectItem>
-                  <SelectItem value="bilbao">Bilbao</SelectItem>
+                  <SelectItem value="madrid">Madrid, Spain</SelectItem>
+                  <SelectItem value="barcelona">Barcelona, Spain</SelectItem>
+                  <SelectItem value="valencia">Valencia, Spain</SelectItem>
+                  <SelectItem value="seville">Seville, Spain</SelectItem>
+                  <SelectItem value="bilbao">Bilbao, Spain</SelectItem>
+                  <SelectItem value="malaga">Málaga, Spain</SelectItem>
+                  <SelectItem value="zaragoza">Zaragoza, Spain</SelectItem>
+                  <SelectItem value="lisbon">Lisbon, Portugal</SelectItem>
+                  <SelectItem value="porto">Porto, Portugal</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -52,10 +56,23 @@ export const InstantQuoteForm = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="paris">Paris, France</SelectItem>
+                  <SelectItem value="lyon">Lyon, France</SelectItem>
+                  <SelectItem value="marseille">Marseille, France</SelectItem>
                   <SelectItem value="berlin">Berlin, Germany</SelectItem>
+                  <SelectItem value="munich">Munich, Germany</SelectItem>
+                  <SelectItem value="frankfurt">Frankfurt, Germany</SelectItem>
                   <SelectItem value="amsterdam">Amsterdam, Netherlands</SelectItem>
+                  <SelectItem value="rotterdam">Rotterdam, Netherlands</SelectItem>
                   <SelectItem value="brussels">Brussels, Belgium</SelectItem>
+                  <SelectItem value="antwerp">Antwerp, Belgium</SelectItem>
                   <SelectItem value="london">London, UK</SelectItem>
+                  <SelectItem value="manchester">Manchester, UK</SelectItem>
+                  <SelectItem value="milan">Milan, Italy</SelectItem>
+                  <SelectItem value="rome">Rome, Italy</SelectItem>
+                  <SelectItem value="zurich">Zurich, Switzerland</SelectItem>
+                  <SelectItem value="vienna">Vienna, Austria</SelectItem>
+                  <SelectItem value="copenhagen">Copenhagen, Denmark</SelectItem>
+                  <SelectItem value="stockholm">Stockholm, Sweden</SelectItem>
                 </SelectContent>
               </Select>
             </div>

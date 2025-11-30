@@ -113,6 +113,68 @@ export type Database = {
         }
         Relationships: []
       }
+      shipments: {
+        Row: {
+          created_at: string
+          current_location: string | null
+          customer_email: string
+          customer_phone: string | null
+          destination: string
+          estimated_delivery: string | null
+          id: string
+          origin: string
+          quote_id: string | null
+          service_type: string
+          status: string
+          timeline: Json | null
+          tracking_number: string
+          updated_at: string
+          weight: number
+        }
+        Insert: {
+          created_at?: string
+          current_location?: string | null
+          customer_email: string
+          customer_phone?: string | null
+          destination: string
+          estimated_delivery?: string | null
+          id?: string
+          origin: string
+          quote_id?: string | null
+          service_type: string
+          status?: string
+          timeline?: Json | null
+          tracking_number: string
+          updated_at?: string
+          weight: number
+        }
+        Update: {
+          created_at?: string
+          current_location?: string | null
+          customer_email?: string
+          customer_phone?: string | null
+          destination?: string
+          estimated_delivery?: string | null
+          id?: string
+          origin?: string
+          quote_id?: string | null
+          service_type?: string
+          status?: string
+          timeline?: Json | null
+          tracking_number?: string
+          updated_at?: string
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shipments_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quotes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

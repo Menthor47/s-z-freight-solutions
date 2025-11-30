@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Truck, Train, Ship, Warehouse, Globe, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-truck.jpg";
+import { SEO } from "@/components/SEO";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { LocalBusinessSchema } from "@/components/StructuredData";
 
 const Index = () => {
   const services = [
@@ -51,7 +54,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO />
+      <LocalBusinessSchema />
       <Navigation />
+      <WhatsAppButton />
       
       {/* Hero Section */}
       <section className="relative min-h-[600px] flex items-center bg-gradient-to-br from-primary/5 to-primary/10">
