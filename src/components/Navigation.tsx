@@ -4,17 +4,20 @@ import { Menu, Phone } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { BUSINESS_INFO } from "@/lib/constants";
+import { useTranslation } from "@/hooks/useTranslation";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { t } = useTranslation();
 
   const navLinks = [
-    { label: "Services", path: "/services" },
-    { label: "Relocation", path: "/relocation" },
-    { label: "Get Quote", path: "/get-quote" },
-    { label: "About", path: "/about" },
-    { label: "Contact", path: "/contact" },
+    { label: t("nav.services"), path: "/services" },
+    { label: t("nav.relocation"), path: "/relocation" },
+    { label: t("nav.getQuote"), path: "/get-quote" },
+    { label: t("nav.about"), path: "/about" },
+    { label: t("nav.contact"), path: "/contact" },
   ];
 
   const isActive = (path: string) => {
@@ -57,12 +60,13 @@ export const Navigation = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center space-x-4">
+          <LanguageSwitcher />
           <a href={`tel:${BUSINESS_INFO.phoneRaw}`} className="flex items-center space-x-2 text-sm font-medium">
             <Phone className="h-4 w-4" />
             <span>{BUSINESS_INFO.phone}</span>
           </a>
           <Button asChild>
-            <Link to="/get-quote">Get Quote</Link>
+            <Link to="/get-quote">{t("nav.getQuote")}</Link>
           </Button>
         </div>
 

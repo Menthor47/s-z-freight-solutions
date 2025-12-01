@@ -12,9 +12,11 @@ import { contactFormSchema } from "@/lib/validations";
 import { SEO } from "@/components/SEO";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { PageBreadcrumbs } from "@/components/PageBreadcrumbs";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Contact = () => {
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
@@ -28,7 +30,7 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    
+
     try {
       contactFormSchema.parse(formData);
     } catch (error: any) {
@@ -39,8 +41,8 @@ const Contact = () => {
         });
         setErrors(newErrors);
         toast({
-          title: "Validation Error",
-          description: "Please check all fields and try again.",
+          title: t("contact.validationError"),
+          description: t("contact.checkFields"),
           variant: "destructive",
         });
         return;
@@ -48,23 +50,23 @@ const Contact = () => {
     }
 
     setLoading(true);
-    
+
     try {
       const { error } = await supabase.from("contact_submissions").insert([formData]);
-      
+
       if (error) throw error;
 
       toast({
-        title: "Message Sent!",
-        description: "We'll get back to you within 24 hours.",
+        title: t("contact.messageSent"),
+        description: t("contact.willRespond"),
       });
-      
+
       setFormData({ name: "", email: "", phone: "", company: "", message: "" });
     } catch (error) {
       console.error("Contact form error:", error);
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
+        title: t("contact.error"),
+        description: t("contact.failedSend"),
         variant: "destructive",
       });
     } finally {
@@ -74,23 +76,23 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <SEO 
-        title="Contact Us - S&Z Trading International"
-        description="Get in touch with S&Z Trading International for all your freight and logistics needs. Available 24/7 for emergency support."
+      <SEO
+        title={t("contact.pageTitle")}
+        description={t("contact.pageDescription")}
         keywords="contact logistics, freight support, S&Z Trading International contact"
       />
       <Navigation />
       <WhatsAppButton />
-      
+
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">
         <div className="container mx-auto px-4">
           <div className="mb-4 text-left">
-            <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "Contact" }]} />
+            <PageBreadcrumbs items={[{ label: t("nav.home"), to: "/" }, { label: t("nav.contact") }]} />
           </div>
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">{t("contact.pageTitle")}</h1>
             <p className="text-xl text-muted-foreground">
-              Have questions? Our team is ready to help with your logistics needs
+              {t("contact.pageSubtitle")}
             </p>
           </div>
         </div>
@@ -102,54 +104,54 @@ const Contact = () => {
             {/* Contact Form */}
             <Card>
               <CardHeader>
-                <CardTitle>Send Us a Message</CardTitle>
+                <CardTitle>{t("contact.sendMessage")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Name *</label>
+                    <label className="text-sm font-medium mb-2 block">{t("contact.name")} *</label>
                     <Input
                       required
-                      placeholder="John Doe"
+                      placeholder={t("contact.namePlaceholder")}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                     {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Email *</label>
+                    <label className="text-sm font-medium mb-2 block">{t("contact.email")} *</label>
                     <Input
                       required
                       type="email"
-                      placeholder="john@company.com"
+                      placeholder={t("contact.emailPlaceholder")}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
                     {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Phone</label>
+                    <label className="text-sm font-medium mb-2 block">{t("contact.phone")}</label>
                     <Input
                       type="tel"
-                      placeholder="+34 600 123 456"
+                      placeholder={t("contact.phonePlaceholder")}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
                     {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Company</label>
+                    <label className="text-sm font-medium mb-2 block">{t("contact.company")}</label>
                     <Input
-                      placeholder="Your Company Ltd"
+                      placeholder={t("contact.companyPlaceholder")}
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Message *</label>
+                    <label className="text-sm font-medium mb-2 block">{t("contact.message")} *</label>
                     <Textarea
                       required
-                      placeholder="Tell us about your logistics needs..."
+                      placeholder={t("contact.messagePlaceholder")}
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -158,7 +160,7 @@ const Contact = () => {
                   </div>
                   <Button type="submit" size="lg" className="w-full" disabled={loading}>
                     {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {loading ? "Sending..." : "Send Message"}
+                    {loading ? t("contact.sending") : t("contact.send")}
                   </Button>
                 </form>
               </CardContent>
@@ -171,10 +173,10 @@ const Contact = () => {
                   <div className="flex items-start space-x-4">
                     <MapPin className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-semibold mb-2">Head Office</h3>
+                      <h3 className="font-semibold mb-2">{t("contact.headOffice")}</h3>
                       <p className="text-muted-foreground">
-                        Málaga<br />
-                        Spain
+                        {t("contact.malaga")}<br />
+                        {t("contact.spain")}
                       </p>
                     </div>
                   </div>
@@ -186,7 +188,7 @@ const Contact = () => {
                   <div className="flex items-start space-x-4">
                     <Phone className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-semibold mb-2">Phone</h3>
+                      <h3 className="font-semibold mb-2">{t("contact.phone")}</h3>
                       <p className="text-muted-foreground">
                         <a href="tel:+34684482440" className="text-primary hover:underline">+34 684 48 24 40</a>
                       </p>
@@ -200,7 +202,7 @@ const Contact = () => {
                   <div className="flex items-start space-x-4">
                     <Mail className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-semibold mb-2">Email</h3>
+                      <h3 className="font-semibold mb-2">{t("contact.email")}</h3>
                       <p className="text-muted-foreground">
                         <a href="mailto:esoffice@szitrans.com" className="text-primary hover:underline">esoffice@szitrans.com</a>
                       </p>
@@ -214,12 +216,12 @@ const Contact = () => {
                   <div className="flex items-start space-x-4">
                     <Clock className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-semibold mb-2">Business Hours</h3>
+                      <h3 className="font-semibold mb-2">{t("contact.businessHours")}</h3>
                       <p className="text-muted-foreground">
-                        Monday - Friday: 8:00 AM - 6:00 PM<br />
-                        Saturday: 9:00 AM - 1:00 PM<br />
-                        Sunday: Closed<br />
-                        <span className="text-primary font-medium">Emergency Support: 24/7</span>
+                        {t("contact.weekdays")}<br />
+                        {t("contact.saturday")}<br />
+                        {t("contact.sunday")}<br />
+                        <span className="text-primary font-medium">{t("contact.emergency")}</span>
                       </p>
                     </div>
                   </div>

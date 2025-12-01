@@ -1,7 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const Testimonials = () => {
+  const { t } = useTranslation();
   const testimonials = [
     {
       name: "Carlos Mendez",
@@ -30,9 +32,9 @@ export const Testimonials = () => {
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("testimonials.title")}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Trusted by hundreds of businesses across Europe for reliable freight solutions
+            {t("testimonials.subtitle")}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

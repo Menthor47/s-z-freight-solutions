@@ -11,43 +11,46 @@ import heroImage from "@/assets/hero-truck.jpg";
 import { SEO } from "@/components/SEO";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { LocalBusinessSchema } from "@/components/StructuredData";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Index = () => {
+  const { t } = useTranslation();
+
   const services = [
     {
       icon: Truck,
-      title: "Spanish Road Transport",
-      description: "Nationwide coverage with next-day delivery options",
+      title: t("services.spanishRoad"),
+      description: t("services.spanishRoadDesc"),
       priceRange: "€150",
     },
     {
       icon: Globe,
-      title: "European Road Freight",
-      description: "Cross-border logistics across 25+ European countries",
+      title: t("services.europeanRoad"),
+      description: t("services.europeanRoadDesc"),
       priceRange: "€450",
     },
     {
       icon: Warehouse,
-      title: "Relocation Services",
-      description: "Business and office relocations with care",
+      title: t("services.relocation"),
+      description: t("services.relocationDesc"),
       priceRange: "€800",
     },
     {
       icon: Ship,
-      title: "Global Logistics",
-      description: "Ocean and air freight worldwide",
+      title: t("services.global"),
+      description: t("services.globalDesc"),
       priceRange: "€1,200",
     },
     {
       icon: Warehouse,
-      title: "Warehousing Solutions",
-      description: "Secure storage facilities across Spain",
+      title: t("services.warehousing"),
+      description: t("services.warehousingDesc"),
       priceRange: "€200/mo",
     },
     {
       icon: TrendingUp,
-      title: "Supply Chain Consultancy",
-      description: "Optimize your logistics operations",
+      title: t("services.consultancy"),
+      description: t("services.consultancyDesc"),
       priceRange: "€500",
     },
   ];
@@ -74,34 +77,34 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Spain & European Freight
-                <span className="text-primary block">Transport Solutions</span>
+                {t("home.heroTitle")}
+                <span className="text-primary block">{t("home.heroTitleHighlight")}</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-xl">
-                Reliable, cost-effective logistics and relocation services for your business. From Madrid to Munich, we deliver on time, every time.
+                {t("home.heroDescription")}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="text-lg">
-                  <Link to="/get-quote">Get Free Quote</Link>
+                  <Link to="/get-quote">{t("home.getQuote")}</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="text-lg">
                   <Link to="/get-quote" state={{ serviceType: "relocation" }}>
-                    Plan Your Move
+                    {t("home.planYourMove")}
                   </Link>
                 </Button>
               </div>
               <div className="flex items-center space-x-8 pt-4 text-sm text-muted-foreground">
                 <div className="flex items-center space-x-2">
                   <div className="h-2 w-2 rounded-full bg-accent" />
-                  <span>24/7 Support</span>
+                  <span>{t("home.support24_7")}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="h-2 w-2 rounded-full bg-accent" />
-                  <span>Relocation Experts</span>
+                  <span>{t("home.relocationExperts")}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="h-2 w-2 rounded-full bg-accent" />
-                  <span>Insured Cargo</span>
+                  <span>{t("home.insuredCargo")}</span>
                 </div>
               </div>
             </div>
@@ -119,56 +122,56 @@ const Index = () => {
       <section id="relocation" className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Moving &amp; Relocation Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("home.movingRelocationTitle")}</h2>
             <p className="text-lg text-muted-foreground">
-              Move your business or inventory across Spain and Europe with a partner that treats your cargo like its own. From office moves to warehouse relocations, we plan every step so your operations keep running with minimal downtime.
+              {t("home.movingRelocationDesc")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
             <div className="space-y-2">
-              <h3 className="font-semibold text-lg">End-to-end planning</h3>
+              <h3 className="font-semibold text-lg">{t("home.endToEndPlanning")}</h3>
               <p className="text-sm text-muted-foreground">
-                Dedicated coordinators who plan your move from first survey to final delivery.
+                {t("home.endToEndPlanningDesc")}
               </p>
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold text-lg">Professional packing &amp; handling</h3>
+              <h3 className="font-semibold text-lg">{t("home.professionalPacking")}</h3>
               <p className="text-sm text-muted-foreground">
-                Trained crews, quality packing materials, and the right equipment for heavy, fragile, or high-value items.
+                {t("home.professionalPackingDesc")}
               </p>
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold text-lg">Out-of-hours moves</h3>
+              <h3 className="font-semibold text-lg">{t("home.outOfHours")}</h3>
               <p className="text-sm text-muted-foreground">
-                Evening and weekend relocations to avoid disruption to your teams and customers.
+                {t("home.outOfHoursDesc")}
               </p>
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold text-lg">Safe and compliant transport</h3>
+              <h3 className="font-semibold text-lg">{t("home.safeCompliant")}</h3>
               <p className="text-sm text-muted-foreground">
-                Vehicles and routes selected for your load type, with insurance options tailored to your risk profile.
+                {t("home.safeCompliantDesc")}
               </p>
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold text-lg">Pan-European coverage</h3>
+              <h3 className="font-semibold text-lg">{t("home.panEuropean")}</h3>
               <p className="text-sm text-muted-foreground">
-                Reliable road and intermodal connections across Spain and all major European corridors.
+                {t("home.panEuropeanDesc")}
               </p>
             </div>
           </div>
           <div className="text-center">
             <p className="text-lg text-muted-foreground mb-6">
-              Ready to plan a move? Share your route, dates, and what you need to move, and we’ll prepare a tailored relocation plan and quote.
+              {t("home.readyToPlan")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg">
                 <Link to="/get-quote" state={{ serviceType: "relocation" }}>
-                  Plan Your Move
+                  {t("home.planYourMove")}
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <Link to="/contact">
-                  Talk to a Relocation Specialist
+                  {t("home.talkToSpecialist")}
                 </Link>
               </Button>
             </div>
@@ -180,9 +183,9 @@ const Index = () => {
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("home.ourServices")}</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive freight solutions tailored to your business needs
+              {t("home.comprehensiveFreight")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -202,13 +205,13 @@ const Index = () => {
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Optimize Your Logistics?
+            {t("home.readyToOptimize")}
           </h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            Get a detailed quote in minutes. Our team will respond within 2 hours during business hours.
+            {t("home.getDetailedQuote")}
           </p>
           <Button asChild size="lg" variant="secondary" className="text-lg">
-            <Link to="/get-quote">Request Formal Quote</Link>
+            <Link to="/get-quote">{t("home.requestFormalQuote")}</Link>
           </Button>
         </div>
       </section>

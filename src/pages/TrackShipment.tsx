@@ -4,13 +4,15 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, Package, Truck, CheckCircle, Clock, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { Search, Package, MapPin, Calendar, Clock, CheckCircle, AlertCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { Skeleton } from "@/components/ui/skeleton";
 import { PageBreadcrumbs } from "@/components/PageBreadcrumbs";
+import { useTranslation } from "@/hooks/useTranslation";
+import { Skeleton } from "@/components/ui/skeleton";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 interface Shipment {
   id: string;
@@ -27,6 +29,7 @@ interface Shipment {
 }
 
 const TrackShipment = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [trackingNumber, setTrackingNumber] = useState("");
   const [shipment, setShipment] = useState<Shipment | null>(null);
@@ -139,7 +142,7 @@ const TrackShipment = () => {
       case 'delivered':
         return <CheckCircle className="h-5 w-5 text-white" />;
       case 'in_transit':
-        return <Truck className="h-5 w-5 text-white" />;
+        return <MapPin className="h-5 w-5 text-white" />;
       case 'picked_up':
         return <Package className="h-5 w-5 text-white" />;
       default:
@@ -163,9 +166,9 @@ const TrackShipment = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO 
-        title="Track Your Shipment - Real-Time Updates"
-        description="Track your freight shipment in real-time. Get instant updates on location and delivery status."
-        keywords="track shipment, freight tracking, cargo tracking, logistics tracking"
+        title={t("trackShipment.pageTitle")}
+        description={t("trackShipment.pageDescription")}
+        keywords="shipment tracking, freight tracking, cargo tracking, delivery status"
       />
       <Navigation />
       <WhatsAppButton />
@@ -173,12 +176,12 @@ const TrackShipment = () => {
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">
         <div className="container mx-auto px-4">
           <div className="mb-4 text-left">
-            <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "Track Shipment" }]} />
+            <PageBreadcrumbs items={[{ label: t("nav.home"), to: "/" }, { label: t("nav.trackShipment") }]} />
           </div>
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Track Your Shipment</h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Enter your tracking number or email to get real-time updates on your cargo
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">{t("trackShipment.pageTitle")}</h1>
+            <p className="text-xl text-muted-foreground">
+              {t("trackShipment.pageSubtitle")}
             </p>
           </div>
         </div>
@@ -190,30 +193,35 @@ const TrackShipment = () => {
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Search className="h-5 w-5" />
-                <span>Enter Tracking Information</span>
+                <span>{t("trackShipment.trackingInfo")}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleTrack} className="space-y-4">
                 <div>
                   <label className="text-sm font-medium mb-2 block">
-                    Tracking Number or Email Address
+                    <div className="relative max-w-2xl mx-auto">
+                      <Input
+                        type="text"
+                        placeholder={t("trackShipment.trackingPlaceholder")}
+                        value={trackingNumber}
+                        onChange={(e) => setTrackingNumber(e.target.value.toUpperCase())}
+                        className="pr-12 text-lg"
+                      />
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="absolute right-1 top-1"
+                        disabled={!trackingNumber || loading}
+                      >
+                        {loading ? t("trackShipment.searching") : t("trackShipment.track")}
+                      </Button>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      {t("trackShipment.trackingInfo")}
+                    </p>
                   </label>
-                  <Input
-                    placeholder="e.g., SZ2024-12345 or your@email.com"
-                    value={trackingNumber}
-                    onChange={(e) => setTrackingNumber(e.target.value)}
-                    className="text-lg"
-                  />
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Enter the tracking number from your confirmation email, or use the email address you provided when booking.
-                  </p>
                 </div>
-                <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                  {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-                  <Search className="mr-2 h-5 w-5" />
-                  Track Shipment
-                </Button>
               </form>
 
               {loading && (
@@ -228,7 +236,7 @@ const TrackShipment = () => {
                 <div className="mt-8 space-y-6 animate-fade-in">
                   <div className="border-t pt-6">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-semibold">Shipment Status</h3>
+                      <h3 className="text-xl font-semibold">{t("trackShipment.shipmentStatus")}</h3>
                       <span className={`px-3 py-1 rounded-full text-sm font-medium text-white ${getStatusColor(shipment.status)}`}>
                         {shipment.status.replace('_', ' ').toUpperCase()}
                       </span>
@@ -271,65 +279,69 @@ const TrackShipment = () => {
                   </div>
 
                   <div className="bg-muted/30 p-4 rounded-lg">
-                    <h4 className="font-semibold mb-3">Shipment Details</h4>
+                    <h4 className="font-semibold mb-3">{t("trackShipment.shipmentDetails")}</h4>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="text-muted-foreground">Tracking Number:</span>
+                        <span className="text-muted-foreground">{t("trackShipment.trackingNumberLabel")}:</span>
                         <p className="font-medium">{shipment.tracking_number}</p>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Service:</span>
-                        <p className="font-medium">{shipment.service_type.replace('_', ' ')}</p>
+                        <span className="text-muted-foreground">{t("trackShipment.statusLabel")}:</span>
+                        <p className="font-medium">
+                          {shipment.status === "delivered" ? t("trackShipment.delivered") : 
+                           shipment.status === "in_transit" ? t("trackShipment.inTransit") : 
+                           shipment.status === "processing" ? t("trackShipment.processing") : t("trackShipment.unknown")}
+                        </p>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Origin:</span>
+                        <span className="text-muted-foreground">{t("trackShipment.originLabel")}:</span>
                         <p className="font-medium">{shipment.origin}</p>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Destination:</span>
+                        <span className="text-muted-foreground">{t("trackShipment.destinationLabel")}:</span>
                         <p className="font-medium">{shipment.destination}</p>
                       </div>
-                      {shipment.current_location && (
-                        <div>
-                          <span className="text-muted-foreground">Current Location:</span>
-                          <p className="font-medium">{shipment.current_location}</p>
-                        </div>
-                      )}
                       <div>
-                        <span className="text-muted-foreground">Weight:</span>
-                        <p className="font-medium">{shipment.weight} kg</p>
+                        <span className="text-muted-foreground">{t("trackShipment.estimatedDelivery")}:</span>
+                        <p className="font-medium">{shipment.estimated_delivery}</p>
                       </div>
-                      {shipment.estimated_delivery && (
-                        <div className="col-span-2">
-                          <span className="text-muted-foreground">Estimated Delivery:</span>
-                          <p className="font-medium">{new Date(shipment.estimated_delivery).toLocaleDateString()}</p>
-                        </div>
-                      )}
+                      <div>
+                        <span className="text-muted-foreground">{t("trackShipment.currentLocation")}:</span>
+                        <p className="font-medium">{shipment.current_location}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
 
               {!loading && searched && !shipment && (
-                <div className="mt-8 text-center py-8 animate-fade-in">
-                  <Package className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">No Shipment Found</h3>
+                <div className="text-center space-y-4">
+                  <AlertCircle className="h-16 w-16 text-orange-500 mx-auto" />
+                  <h3 className="text-xl font-semibold">{t("trackShipment.noShipmentFound")}</h3>
                   <p className="text-muted-foreground">
-                    We couldn't find a shipment with that tracking number or email.<br />
-                    Please check your information and try again.
+                    {t("trackShipment.noShipmentMessage")}
                   </p>
+                  <Button variant="outline" onClick={() => setShipment(null)}>
+                    {t("trackShipment.tryAnother")}
+                  </Button>
                 </div>
               )}
             </CardContent>
           </Card>
 
-          <div className="mt-8 text-center">
-            <p className="text-sm text-muted-foreground mb-4">
-              Need help? Our support team is available 24/7
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">{t("trackShipment.needHelp")}</h2>
+            <p className="text-muted-foreground mb-6">
+              {t("trackShipment.needHelpDesc")}
             </p>
-            <Button variant="outline" size="lg" asChild>
-              <a href="/contact">Contact Support</a>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg">
+                <Link to="/contact">{t("trackShipment.contactSupport")}</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="tel:+34684482440">{t("trackShipment.callUs")}</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

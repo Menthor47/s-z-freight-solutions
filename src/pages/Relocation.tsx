@@ -7,13 +7,15 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { PageBreadcrumbs } from "@/components/PageBreadcrumbs";
 import { Truck, MapPin, Package, Clock, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Relocation = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen flex flex-col">
       <SEO 
-        title="Business Relocation Services"
-        description="Professional business and office relocation services across Spain and Europe. Careful planning, expert handling, and minimal downtime for your move."
+        title={t("relocation.pageTitle")}
+        description={t("relocation.pageDescription")}
         keywords="business relocation, office move, warehouse relocation, logistics Spain, European relocation"
       />
       <Navigation />
@@ -22,24 +24,24 @@ const Relocation = () => {
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">
         <div className="container mx-auto px-4">
           <div className="mb-4 text-left">
-            <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "Relocation" }]} />
+            <PageBreadcrumbs items={[{ label: t("nav.home"), to: "/" }, { label: t("nav.relocation") }]} />
           </div>
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Moving &amp; Relocation Services
+              {t("relocation.pageTitle")}
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Move your business, warehouse, or inventory across Spain and Europe with a logistics partner that plans every detail and treats your cargo like its own.
+              {t("relocation.pageSubtitle")}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg" className="text-lg">
                 <Link to="/get-quote" state={{ serviceType: "relocation" }}>
-                  Get Relocation Quote
+                  {t("relocation.getQuote")}
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="text-lg">
                 <Link to="/contact">
-                  Talk to a Relocation Specialist
+                  {t("relocation.talkSpecialist")}
                 </Link>
               </Button>
             </div>
@@ -54,18 +56,18 @@ const Relocation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
                   <Truck className="h-6 w-6 text-primary" />
-                  What We Move
+                  {t("relocation.whatWeMove")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 text-muted-foreground">
                 <p>
-                  We specialise in business relocations of all sizes, from small offices to multi-site warehouse and light industrial moves. Whether you are consolidating sites, opening a new location, or reconfiguring your logistics network, we plan your move around your operations.
+                  {t("relocation.whatWeMoveDesc")}
                 </p>
                 <ul className="list-disc pl-5 space-y-1 text-sm">
-                  <li>Office relocations, including desks, IT equipment, and archives</li>
-                  <li>Warehouse moves with pallet racking, machinery, and inventory</li>
-                  <li>Light industrial and workshop equipment</li>
-                  <li>High-value, fragile, or specialist items that require extra care</li>
+                  <li>{t("relocation.officeRelocations")}</li>
+                  <li>{t("relocation.warehouseMoves")}</li>
+                  <li>{t("relocation.lightIndustrial")}</li>
+                  <li>{t("relocation.specialistItems")}</li>
                 </ul>
               </CardContent>
             </Card>
@@ -74,18 +76,18 @@ const Relocation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
                   <MapPin className="h-6 w-6 text-primary" />
-                  Coverage
+                  {t("relocation.coverage")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2 text-sm text-muted-foreground">
                 <p>
-                  Based in Spain, we manage relocations across major European corridors, including:
+                  {t("relocation.coverageDesc")}
                 </p>
                 <ul className="list-disc pl-5 space-y-1">
-                  <li>Spain and Portugal</li>
-                  <li>France, Germany, Benelux</li>
-                  <li>Italy and surrounding regions</li>
-                  <li>UK and Ireland via road and ferry connections</li>
+                  <li>{t("relocation.spainPortugal")}</li>
+                  <li>{t("relocation.franceGermany")}</li>
+                  <li>{t("relocation.italyRegions")}</li>
+                  <li>{t("relocation.ukIreland")}</li>
                 </ul>
               </CardContent>
             </Card>
@@ -96,12 +98,12 @@ const Relocation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <Package className="h-5 w-5 text-primary" />
-                  Professional Packing
+                  {t("relocation.professionalPacking")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground space-y-2">
                 <p>
-                  Trained crews use quality packing materials and labelling so everything arrives safely and can be placed exactly where you need it.
+                  {t("relocation.professionalPackingDesc")}
                 </p>
               </CardContent>
             </Card>
@@ -110,12 +112,12 @@ const Relocation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <Clock className="h-5 w-5 text-primary" />
-                  Minimal Downtime
+                  {t("relocation.minimalDowntime")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground space-y-2">
                 <p>
-                  Evening, overnight, and weekend moves available so your teams and customers experience as little disruption as possible.
+                  {t("relocation.minimalDowntimeDesc")}
                 </p>
               </CardContent>
             </Card>
@@ -124,12 +126,12 @@ const Relocation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <CheckCircle className="h-5 w-5 text-primary" />
-                  Safe &amp; Compliant
+                  {t("relocation.safeCompliant")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground space-y-2">
                 <p>
-                  Vehicles and routes are selected for your load type, with insurance options available for high-value or sensitive goods.
+                  {t("relocation.safeCompliantDesc")}
                 </p>
               </CardContent>
             </Card>
@@ -140,42 +142,42 @@ const Relocation = () => {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How Our Relocation Process Works</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("relocation.processTitle")}</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A clear, step-by-step process so you know exactly what will happen before, during, and after moving day.
+              {t("relocation.processDesc")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">1. Initial consultation</CardTitle>
+                <CardTitle className="text-lg">{t("relocation.step1Title")}</CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                We discuss your current and new locations, timeframes, special items, and any constraints around access or working hours.
+                {t("relocation.step1Desc")}
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">2. Site survey &amp; plan</CardTitle>
+                <CardTitle className="text-lg">{t("relocation.step2Title")}</CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                When needed, we perform a site visit and build a detailed move plan, including inventory, packing, vehicle requirements, and schedule.
+                {t("relocation.step2Desc")}
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">3. Packing &amp; loading</CardTitle>
+                <CardTitle className="text-lg">{t("relocation.step3Title")}</CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                Our crews pack, label, and load your items carefully, working to the agreed timetable and health and safety standards.
+                {t("relocation.step3Desc")}
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">4. Delivery &amp; setup</CardTitle>
+                <CardTitle className="text-lg">{t("relocation.step4Title")}</CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                We deliver to your new site, position key items as requested, and collect used packing materials once you are operational.
+                {t("relocation.step4Desc")}
               </CardContent>
             </Card>
           </div>
@@ -184,19 +186,19 @@ const Relocation = () => {
 
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto px-4 text-center max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Plan Your Move?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("relocation.readyTitle")}</h2>
           <p className="text-lg md:text-xl mb-8 text-white/90">
-            Share your routes, dates, and what you need to move, and we will prepare a tailored relocation plan and quote.
+            {t("relocation.readyDesc")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="secondary" className="text-lg">
               <Link to="/get-quote" state={{ serviceType: "relocation" }}>
-                Start Relocation Quote
+                {t("relocation.startQuote")}
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="text-lg bg-transparent border-white text-white hover:bg-white hover:text-primary">
               <Link to="/contact">
-                Contact Our Team
+                {t("relocation.contactTeam")}
               </Link>
             </Button>
           </div>
