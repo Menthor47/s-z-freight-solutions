@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Linkedin, Twitter } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
+import { BUSINESS_INFO } from "@/lib/constants";
+import sziLogo from "@/assets/szi-group-logo.jpg";
 
 export const Footer = () => {
-  const { t } = useTranslation();
+  const businessInfo = BUSINESS_INFO;
+
   return (
     <footer className="border-t bg-muted/30">
       <div className="container mx-auto px-4 py-12">
@@ -11,16 +13,18 @@ export const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                <span className="text-xl font-bold text-white">S&Z</span>
-              </div>
+              <img
+                src={sziLogo}
+                alt="S&Z Trading / SZI Group logo"
+                className="h-10 w-auto rounded-lg bg-white object-contain shadow-sm"
+              />
               <div>
-                <div className="font-bold text-trust-navy">{t("footer.companyName")}</div>
-                <div className="text-xs text-muted-foreground uppercase">{t("footer.companyType")}</div>
+                <div className="font-bold text-trust-navy">S&Z TRADING</div>
+                <div className="text-xs text-muted-foreground uppercase">International S.C.A.</div>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              {t("footer.professional")}
+              {businessInfo.tagline} across {businessInfo.country} and Europe since {businessInfo.foundedYear}.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -37,50 +41,56 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">{t("footer.quickLinks")}</h3>
+            <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t("nav.services")}</Link></li>
-              <li><Link to="/get-quote" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t("nav.getQuote")}</Link></li>
-              <li><Link to="/relocation" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t("nav.relocation")}</Link></li>
-              <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t("nav.about")}</Link></li>
-              <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t("nav.contact")}</Link></li>
+              <li><Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">Our Services</Link></li>
+              <li><Link to="/get-quote" className="text-sm text-muted-foreground hover:text-primary transition-colors">Get Quote</Link></li>
+              <li><Link to="/relocation" className="text-sm text-muted-foreground hover:text-primary transition-colors">Relocation</Link></li>
+              <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="font-semibold mb-4">{t("footer.services")}</h3>
+            <h3 className="font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li className="text-sm text-muted-foreground">{t("services.spanishRoad")}</li>
-              <li className="text-sm text-muted-foreground">{t("services.europeanRoad")}</li>
-              <li className="text-sm text-muted-foreground">{t("services.global")}</li>
-              <li className="text-sm text-muted-foreground">{t("services.warehousing")}</li>
-              <li className="text-sm text-muted-foreground">{t("services.consultancy")}</li>
+              <li className="text-sm text-muted-foreground">Spanish Road Transport</li>
+              <li className="text-sm text-muted-foreground">European Logistics</li>
+              <li className="text-sm text-muted-foreground">Global Shipping</li>
+              <li className="text-sm text-muted-foreground">Warehousing</li>
+              <li className="text-sm text-muted-foreground">Supply Chain</li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4">{t("footer.contactUs")}</h3>
+            <h3 className="font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>{t("contact.malaga")}, {t("contact.spain")}</span>
+                <span>
+                  {businessInfo.city}, {businessInfo.country}
+                </span>
               </li>
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <a href="tel:+34684482440" className="hover:text-primary transition-colors">+34 684 48 24 40</a>
+                <a href={`tel:${businessInfo.phoneRaw}`} className="hover:text-primary transition-colors">
+                  {businessInfo.phone}
+                </a>
               </li>
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                <a href="mailto:esoffice@szitrans.com" className="hover:text-primary transition-colors">esoffice@szitrans.com</a>
+                <a href={`mailto:${businessInfo.email}`} className="hover:text-primary transition-colors">
+                  {businessInfo.email}
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>{t("footer.copyright", "&copy; {year} S&Z TRADING INTERNATIONAL S.C.A. All rights reserved.").replace("{year}", new Date().getFullYear().toString())}</p>
+          <p>&copy; {new Date().getFullYear()} S&Z TRADING INTERNATIONAL S.C.A. All rights reserved.</p>
         </div>
       </div>
     </footer>

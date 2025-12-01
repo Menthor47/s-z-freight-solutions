@@ -1,19 +1,26 @@
 import { Helmet } from "react-helmet-async";
+import { useLocale } from "@/hooks/useLocale";
+import { BUSINESS_INFO as BUSINESS_INFO_EN } from "@/lib/constants";
+import { BUSINESS_INFO as BUSINESS_INFO_ES } from "@/lib/constants.es";
 
 export const LocalBusinessSchema = () => {
+  const { isSpanish } = useLocale();
+  const businessInfo = isSpanish ? BUSINESS_INFO_ES : BUSINESS_INFO_EN;
   const schema = {
     "@context": "https://schema.org",
     "@type": "FreightCompany",
-    "name": "S&Z TRADING INTERNATIONAL S.C.A.",
+    "name": businessInfo.name,
     "image": "https://szitrans.com/hero-truck.jpg",
-    "description": "Professional freight and logistics services across Spain and Europe. Specializing in road transport, warehousing, relocation services, and global shipping solutions.",
+    "description": isSpanish
+      ? "Servicios profesionales de transporte y logística en España y Europa. Especialistas en transporte por carretera, almacenaje, reubicaciones y envíos globales."
+      : "Professional freight and logistics services across Spain and Europe. Specializing in road transport, warehousing, relocation services, and global shipping solutions.",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Málaga",
-      "addressCountry": "ES"
+      "addressLocality": businessInfo.city,
+      "addressCountry": businessInfo.countryCode
     },
-    "telephone": "+34 684 48 24 40",
-    "email": "esoffice@szitrans.com",
+    "telephone": businessInfo.phone,
+    "email": businessInfo.email,
     "url": "https://szitrans.com",
     "priceRange": "€€",
     "openingHoursSpecification": [
@@ -87,7 +94,9 @@ export const LocalBusinessSchema = () => {
 };
 
 export const ServicesFaqSchema = () => {
-  const schema = {
+  const { isSpanish } = useLocale();
+
+  const schemaEn = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
@@ -157,6 +166,79 @@ export const ServicesFaqSchema = () => {
       }
     ]
   };
+
+  const schemaEs = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué regiones cubren?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Operamos desde España a través de los principales corredores europeos. Nuestra red cubre España, Portugal, Francia, Alemania, Benelux, Italia y Reino Unido, con conexiones al resto de Europa."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué tipos de mercancías transportan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Manejamos mercancía paletizada, cargas completas y parciales, maquinaria, stock minorista, envíos de e-commerce y carga industrial. Para cargas peligrosas, con temperatura controlada o especiales, confirmamos la mejor solución."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Mis envíos están asegurados?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Todos los envíos están cubiertos por responsabilidad estándar del transportista. Podemos organizar seguros extendidos para cargas de alto valor o sensibles. Indica el valor aproximado al solicitar presupuesto."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo solicito un presupuesto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Puedes solicitar presupuesto a través de nuestro formulario online, enviando los detalles por email o llamando a nuestro equipo. Proporciona origen, destino, fechas, peso o volumen aproximado y requisitos especiales."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué tipo de reubicaciones manejan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gestionamos reubicaciones empresariales de todos los tamaños, desde pequeñas oficinas hasta almacenes e instalaciones industriales ligeras. También podemos apoyar mudanzas residenciales vinculadas a traslados corporativos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Pueden realizar mudanzas fuera del horario laboral?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Muchos clientes prefieren mudanzas por la noche o en fin de semana para minimizar interrupciones. Planificamos reubicaciones fuera del horario estándar, incluyendo mudanzas por fases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Proporcionan materiales y servicios de embalaje?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Podemos suministrar cajas, embalajes, materiales de protección, etiquetas y ofrecer servicios completos de embalaje y desembalaje. Tú decides qué gestiona tu equipo y qué nos encargamos nosotros."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué información necesitan para un presupuesto de reubicación?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Para un presupuesto de reubicación preciso, solicitamos direcciones actuales y nuevas, fechas preferidas, tamaño aproximado de las instalaciones, equipos pesados o especiales, detalles de acceso y si necesitas servicios de embalaje."
+        }
+      }
+    ]
+  };
+
+  const schema = isSpanish ? schemaEs : schemaEn;
 
   return (
     <Helmet>

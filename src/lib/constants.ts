@@ -66,7 +66,8 @@ export const QUOTE_CALCULATION = {
  * SEO Constants
  */
 export const SEO_DEFAULTS = {
-  title: `${BUSINESS_INFO.name} - ${BUSINESS_INFO.tagline}`,
+  siteName: "S&Z TRADING INTERNATIONAL S.C.A.",
+  title: "Professional Freight & Logistics Solutions",
   description: "Reliable freight transport across Spain and Europe. Road freight, warehousing, relocation services, global logistics, and supply chain consultancy. Get instant quotes 24/7.",
   keywords: "freight transport, logistics Spain, European road freight, warehousing, supply chain, cargo transport, business relocation, S&Z Trading International",
   ogImage: "/hero-truck.jpg",

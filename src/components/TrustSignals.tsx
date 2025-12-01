@@ -1,28 +1,26 @@
-import { Shield, Award, Users, Clock } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
+import { Award, Users, Globe, TrendingUp } from "lucide-react";
 
 export const TrustSignals = () => {
-  const { t } = useTranslation();
   const signals = [
     {
-      icon: Shield,
-      value: "€250K",
-      label: t("trustSignals.insuranceCoverage"),
+      icon: Award,
+      value: "3+",
+      label: "Years in Business",
     },
     {
       icon: Award,
-      value: "ISO 9001",
-      label: t("trustSignals.certifiedQuality"),
+      value: "200+",
+      label: "Active Clients",
     },
     {
       icon: Users,
-      value: "250+",
-      label: t("trustSignals.businessClients"),
+      value: "25+",
+      label: "Countries Served",
     },
     {
-      icon: Clock,
-      value: "3+ Years",
-      label: t("trustSignals.inOperation"),
+      icon: TrendingUp,
+      value: "98%",
+      label: "On-Time Delivery",
     },
   ];
 

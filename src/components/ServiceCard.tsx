@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ArrowRight, LucideIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLocale } from "@/hooks/useLocale";
 
 interface ServiceCardProps {
   icon: LucideIcon;
@@ -11,6 +12,9 @@ interface ServiceCardProps {
 }
 
 export const ServiceCard = ({ icon: Icon, title, description, priceRange }: ServiceCardProps) => {
+  const { isSpanish } = useLocale();
+  const basePath = isSpanish ? "/es" : "";
+
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <CardHeader>
@@ -22,12 +26,14 @@ export const ServiceCard = ({ icon: Icon, title, description, priceRange }: Serv
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex items-baseline space-x-2">
-          <span className="text-sm text-muted-foreground">From</span>
+          <span className="text-sm text-muted-foreground">
+            {isSpanish ? "Desde" : "From"}
+          </span>
           <span className="text-2xl font-bold text-primary">{priceRange}</span>
         </div>
         <Button asChild variant="outline" className="w-full group-hover:bg-primary group-hover:text-white transition-colors">
-          <Link to="/get-quote">
-            Get Quote
+          <Link to={`${basePath}/get-quote`}>
+            {isSpanish ? "Solicitar presupuesto" : "Get Quote"}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>

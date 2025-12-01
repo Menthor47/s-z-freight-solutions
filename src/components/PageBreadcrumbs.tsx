@@ -29,8 +29,8 @@ export const PageBreadcrumbs = ({ items }: PageBreadcrumbsProps) => {
           const isLast = index === lastIndex;
 
           return (
-            <>
-              <BreadcrumbItem key={item.label + index}>
+            <span key={`${item.label}-${index}`} className="contents">
+              <BreadcrumbItem>
                 {isLast || !item.to ? (
                   <BreadcrumbPage>{item.label}</BreadcrumbPage>
                 ) : (
@@ -40,7 +40,7 @@ export const PageBreadcrumbs = ({ items }: PageBreadcrumbsProps) => {
                 )}
               </BreadcrumbItem>
               {!isLast && <BreadcrumbSeparator />}
-            </>
+            </span>
           );
         })}
       </BreadcrumbList>

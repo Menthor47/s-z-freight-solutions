@@ -5,15 +5,13 @@ import { Award, Users, Globe, TrendingUp } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { PageBreadcrumbs } from "@/components/PageBreadcrumbs";
-import { useTranslation } from "@/hooks/useTranslation";
 
 const About = () => {
-  const { t } = useTranslation();
   return (
     <div className="min-h-screen flex flex-col">
       <SEO 
-        title={t("about.pageTitle")}
-        description={t("about.pageDescription")}
+        title="About Us - S&Z TRADING INTERNATIONAL S.C.A."
+        description="S&Z TRADING INTERNATIONAL S.C.A. - Your trusted logistics partner in Spain and Europe. Professional freight and relocation services since 2022."
         keywords="about logistics company, freight company Spain, European logistics, S&Z Trading International"
       />
       <Navigation />
@@ -23,12 +21,12 @@ const About = () => {
       <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">
         <div className="container mx-auto px-4">
           <div className="mb-4 text-left">
-            <PageBreadcrumbs items={[{ label: t("nav.home"), to: "/" }, { label: t("nav.about") }]} />
+            <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "About" }]} />
           </div>
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">{t("about.pageTitle")}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">About S&Z TRADING INTERNATIONAL S.C.A.</h1>
             <p className="text-xl text-muted-foreground">
-              {t("about.pageSubtitle")}
+              Your trusted logistics partner in Spain and Europe since 2022
             </p>
           </div>
         </div>
@@ -38,15 +36,15 @@ const About = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="prose prose-lg max-w-none">
-            <h2 className="text-3xl font-bold mb-6">{t("about.ourStory")}</h2>
+            <h2 className="text-3xl font-bold mb-6">Our Story</h2>
             <p className="text-lg text-muted-foreground mb-4">
-              {t("about.storyP1")}
+              Founded in 2022, S&Z TRADING INTERNATIONAL S.C.A. has quickly established itself as a reliable logistics provider in Spain and Europe. Starting with a focus on road transport, we've expanded our services to include comprehensive logistics solutions for businesses of all sizes across the region.
             </p>
             <p className="text-lg text-muted-foreground mb-4">
-              {t("about.storyP2")}
+              We've built our reputation on three pillars: reliability, transparency, and customer service. Every shipment is handled with care, and every client receives personalized attention. This approach has helped us build strong relationships with businesses across various industries.
             </p>
             <p className="text-lg text-muted-foreground">
-              {t("about.storyP3")}
+              Our growing fleet of modern vehicles and network of trusted partners enables us to offer a wide range of services, from local deliveries to international freight solutions. We're committed to providing efficient and cost-effective logistics services while maintaining the highest standards of quality and customer satisfaction.
             </p>
           </div>
         </div>
@@ -55,28 +53,28 @@ const About = () => {
       {/* Values */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">{t("about.whyChoose")}</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Why Choose Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {[
               {
                 icon: Award,
-                title: t("about.certifiedQuality"),
-                description: t("about.certifiedQualityDesc")
+                title: "Certified Quality",
+                description: "ISO 9001 certified with full insurance coverage up to €250K per shipment"
               },
               {
                 icon: Users,
-                title: t("about.dedicatedSupport"),
-                description: t("about.dedicatedSupportDesc")
+                title: "Dedicated Support",
+                description: "Personal account managers and 24/7 customer service for all clients"
               },
               {
                 icon: Globe,
-                title: t("about.wideCoverage"),
-                description: t("about.wideCoverageDesc")
+                title: "Wide Coverage",
+                description: "Operations across 25+ European countries with local expertise"
               },
               {
                 icon: TrendingUp,
-                title: t("about.costEfficient"),
-                description: t("about.costEfficientDesc")
+                title: "Cost Efficient",
+                description: "Competitive rates with no hidden fees. Average 20% cost reduction vs competitors"
               }
             ].map((value, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
@@ -100,10 +98,10 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto text-center">
             {[
-              { value: "2+", label: t("about.yearsInBusiness") },
-              { value: "500+", label: t("about.activeClients") },
-              { value: "25+", label: t("about.countriesServed") },
-              { value: "98%", label: t("about.onTimeDelivery") }
+              { value: "3+", label: "Years in Business" },
+              { value: "200+", label: "Active Clients" },
+              { value: "25+", label: "Countries Served" },
+              { value: "98%", label: "On-Time Delivery" }
             ].map((stat, index) => (
               <div key={index}>
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.value}</div>
@@ -117,30 +115,30 @@ const About = () => {
       {/* Certifications */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl font-bold text-center mb-12">{t("about.certifications")}</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Certifications & Compliance</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <Card>
               <CardContent className="pt-6">
                 <div className="text-2xl font-bold mb-2">ISO 9001:2015</div>
-                <p className="text-sm text-muted-foreground">{t("about.iso9001")}</p>
+                <p className="text-sm text-muted-foreground">Quality Management</p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6">
-                <div className="text-2xl font-bold mb-2">{t("about.aeoCertified")}</div>
-                <p className="text-sm text-muted-foreground">{t("about.aeoDesc")}</p>
+                <div className="text-2xl font-bold mb-2">AEO Certified</div>
+                <p className="text-sm text-muted-foreground">Authorized Economic Operator</p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6">
-                <div className="text-2xl font-bold mb-2">{t("about.iataMember")}</div>
-                <p className="text-sm text-muted-foreground">{t("about.iataDesc")}</p>
+                <div className="text-2xl font-bold mb-2">Chep Associate</div>
+                <p className="text-sm text-muted-foreground">CX/HX/Timo/Trans</p>
               </CardContent>
             </Card>
           </div>
           <div className="mt-8 text-center text-sm text-muted-foreground">
-            <p>{t("about.companyReg")}</p>
-            <p>{t("about.insurance")}</p>
+            <p>Company Registration: VAT/NIF NIF: ESF70700547</p>
+            <p className="font-bold text-base">Fully insured with coverage up to €250k per shipment</p>
           </div>
         </div>
       </section>
